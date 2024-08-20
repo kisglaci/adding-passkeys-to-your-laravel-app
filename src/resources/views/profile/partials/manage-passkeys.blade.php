@@ -26,13 +26,14 @@
     <div class="mt-6">
         <h3 class="font-medium text-gray-900">{{ __('Your Passkeys') }}</h3>
         <ul class="mt-2">
+            @foreach($user->passkeys as $passkey)
             <li class="px-2 py-2 flex justify-between items-center">
                 <div class="flex flex-col">
-                    <span class="font-semibold">1Password</span>
-                    <span class="font-thin text-sm text-gray-600">Added 2 weeks ago</span>
+                    <span class="font-semibold">{{$passkey->name}}</span>
+                    <span class="font-thin text-sm text-gray-600">Added {{$passkey->created_at->diffForHumans()}}</span>
                 </div>
 
-                <form method="post" action="/">
+                <form method="post" action="{{route('passkeys.destroy', $passkey)}}">
                     @csrf
                     @method('DELETE')
 
@@ -40,6 +41,7 @@
                     <x-danger-button class="">Remove</x-danger-button>
                 </form>
             </li>
+            @endforeach
         </ul>
     </div>
 </section>
