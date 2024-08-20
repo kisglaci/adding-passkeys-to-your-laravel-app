@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Passkey;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PasskeyController extends Controller
 {
@@ -60,7 +61,8 @@ class PasskeyController extends Controller
      */
     public function destroy(Passkey $passkey)
     {
-        //
+        Gate::authorize('delete', $passkey);
+
         $passkey->delete();
         return redirect()->route('profile.edit');
     }
