@@ -1,0 +1,9 @@
+# This file serves ONLY local developments purposes
+# It is ment to ease local development.
+# Install composer dependencies in volume using hirak/prestissimo for faster installation.
+# Once dependencies are installed, keep them in your vendor so only the first installation takes more time
+# Feel free to use containers based on this image to install further dependecies:
+# > composer require [VENDOR/PACKAGE] --ignore-platform-reqs --no-scripts --no-suggest
+FROM composer:2.7.7 as build-composer
+
+VOLUME /app
